@@ -10,3 +10,4 @@ if __name__ == '__main__':
     # Remove '... [+ xxx chars]' pattern from 'content'
     for article in articles:
         article.content = re.sub('... \[.*?\]', '', article.content)
+        print(article.content.split("."))

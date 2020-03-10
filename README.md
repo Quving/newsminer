@@ -25,3 +25,18 @@ in order to train a LDA-Model.
 ```[repo]/artifacts/tagger/```
  
  
+### Stemming/Lemmatization
+Example snippet.
+```
+from lemmatizer import Lemmatizer
+
+if __name__ == '__main__':
+    lemmatizer = Lemmatizer()
+    text = "Heute war ein wirklich langer Tag gewesen. Der Hund isst sein Leckerli."
+    text = lemmatizer.lemmatize_text(text=text)
+    print(text)
+```
+
+output:
+
+```heut sein ein wirklich lang tag sein der hund essen sein leckerli```
