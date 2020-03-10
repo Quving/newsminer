@@ -260,3 +260,9 @@ tags
 .vim
 
 # End of https://www.gitignore.io/api/vim,venv,macos,python,pycharm+all
+
+
+
+# Ignore repository specific files
+data/**
+artifacts/**
