@@ -21,7 +21,7 @@ in order to train a LDA-Model.
 '[tiger_release_aug07.corrected.16012013.conll09](https://www.ims.uni-stuttgart.de/documents/ressourcen/korpora/tiger-corpus/download/start.html)'
  that is provided by the University of Stuttgart.
 - Once downloaded, create a directory 'data' and move the downloaded file to that directory.
-- Finally execute ``` python train_tagger_de.py ``` It will store the tagger in picke-format to 
+- Finally execute ``` python train_tagger_de.py ``` It will store the tagger in pickle-format to 
 ```[repo]/artifacts/tagger/```
  
  
