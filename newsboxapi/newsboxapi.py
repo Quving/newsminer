@@ -38,6 +38,6 @@ class NewsboxApi:
                     for json in articles:
                         articles = Article(json=json)
                         list_of_articles.append(articles)
-        with open(filename, 'wb') as file:
-            pickle.dump(list_of_articles, file)
+            with open(filename, 'wb') as file:
+                pickle.dump(list_of_articles, file)
         return list_of_articles
