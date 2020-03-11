@@ -23,7 +23,9 @@ in order to train a LDA-Model.
 - Once downloaded, create a directory 'data' and move the downloaded file to that directory.
 - Finally execute ``` python train_tagger_de.py ``` It will store the tagger in pickle-format to 
 ```[repo]/artifacts/tagger/```
- 
+
+#### References
+https://datascience.blog.wzb.eu/2016/07/13/accurate-part-of-speech-tagging-of-german-texts-with-nltk/ 
  
 ### Stemming/Lemmatization
 Example snippet.
