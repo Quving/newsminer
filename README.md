@@ -45,8 +45,8 @@ output:
 
 ### Train LDA
 - In order to train a LDA, the POS-Tagger is required (stored locally in ```.../artififacts/tagger/...```)
-- Execute ```python train_lda.py```. It can take some minutes depending if you're using cached files or not.
-- If it's done, the browser should opens up automatically.
+- Execute ```python train_lda.py```. It can take some minutes depending on if you're using cached files or not.
+- If it's done, the browser should open up automatically.
 
 
 ## Approach
