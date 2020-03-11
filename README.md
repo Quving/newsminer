@@ -7,11 +7,38 @@ Goal is to obtain a LDA-Model that is capable of clustering the news.
 
 
 ## Setup
+
+### Installation
 Install the required dependencies by the following steps.
 1. ```virtualenv -p $(which python3.6) venv```
 2. ```source venv/bin/acticate```
 3. ```pip install -r requirements.txt```
 
+
+### Authentication
+In order to retrieve articles stored in the Newsbox-API, credentials are required.
+You can obtain them by mailing me (vinh-ngu@hotmail.com).
+
+```
+curl -X POST  \ 
+    -H "accept: application/json" \
+    -H "Content-Type: application/json" \ 
+    -d "{ "username\": "string", "password\": "string"}" \
+    https://newsbox.quving.com/auth/token/
+```
+
+Example Response:
+```bash
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI0NiJ10.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsI2J...",
+  "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI2NiJ10.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZX..."
+}
+```
+
+Now set environment-variable to make it usable in the script.
+```
+export NEWSMINER_AUTH_TOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI2NiJ10.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZX...'
+```
 ## Documentation
 ### Train german POS-Tagger
 The German POS Tagger is required for the lemmatization and stemming. That is a necessary step for the data preprocessing
@@ -43,6 +70,7 @@ output:
 
 ### Train LDA
 - In order to train a LDA, the POS-Tagger is required (stored locally in ```.../artififacts/tagger/...```)
+- Also, you need to have access to the Newsbox-API (see 'Authentication' section above.)
 - Execute ```python train_lda.py```. It can take some minutes depending on if you're using cached files or not.
 - If it's done, the browser should open up automatically.
 
