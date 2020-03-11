@@ -7,6 +7,7 @@ from progressbar import progressbar
 
 from lda import Lda
 from lemmatizer import Lemmatizer
+from minioapi.minioapi import MinioApi
 from newsboxapi.newsboxapi import NewsboxApi
 
 
@@ -42,13 +43,26 @@ def prepare_articles(articles, from_cache=False):
 
 
 if __name__ == '__main__':
+    # Settings
+    use_cache = False
+    update_html = True
+
+    # Retrieve and prepare dataset
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(from_cache=True)
-    texts = prepare_articles(articles=articles, from_cache=True)
+    articles = newsapi.list_articles(from_cache=use_cache)
+    texts = prepare_articles(articles=articles, from_cache=use_cache)
 
     # Train LDA
     lda = Lda()
-    lda.train_lda(texts=texts, num_topics=20)
+    lda.train_lda(texts=texts, num_topics=15)
     lda.persist_lda()
     lda.export_html()
-    lda.visualize()
+    # lda.visualize()
+
+    # Update lda html for newsmap
+    if update_html:
+        minioapi = MinioApi()
+        bucket_name = 'newsmap'
+        minioapi.create_bucket(bucket_name=bucket_name)
+        minioapi.upload_file(bucket_name=bucket_name, filename='index.html', file='artifacts/lda/index.html')
+        minioapi.make_public(bucket_name=bucket_name)
