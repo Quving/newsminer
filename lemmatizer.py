@@ -35,17 +35,14 @@ class Lemmatizer():
         :return:
         """
         # Split the text into sentences to get rid of the punctuation.
-        sentences = text.split(".")
         output = list()
-        for sentence in sentences:
-            sentence = sentence.strip()
-            if sentence:  # If sentence is not empty.
-                tagged_text = self.tagger.tag(text=sentence.split(' '))  # Output [(token, pos)]
-                for word, pos in tagged_text:
-                    token = self.lemmatize_word(word, pos)
-                    if verbose:
-                        print("{} -> {} ({})".format(word, token, pos))
-                    output.append(token.lower() if lower else token)
+        text = " ".join([x for x in text.split() if x.isalnum()]).strip()
+        tagged_text = self.tagger.tag(text=text.split(' '))  # Output [(token, pos)]
+        for word, pos in tagged_text:
+            token = self.lemmatize_word(word, pos)
+            if verbose:
+                print("{} -> {} ({})".format(word, token, pos))
+            output.append(token.lower() if lower else token)
         return ' '.join(output)
 
     def worker(self, queue):
