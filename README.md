@@ -58,6 +58,23 @@ output:
 
 ## Troubleshooting
 ### Mysql - Problems (Mac)
+```
+...
+
+  copying MySQLdb/constants/FIELD_TYPE.py -> build/lib.macosx-10.9-x86_64-3.6/MySQLdb/constants
+  copying MySQLdb/constants/FLAG.py -> build/lib.macosx-10.9-x86_64-3.6/MySQLdb/constants
+  running build_ext
+  building 'MySQLdb._mysql' extension
+  creating build/temp.macosx-10.9-x86_64-3.6
+  creating build/temp.macosx-10.9-x86_64-3.6/MySQLdb
+  gcc -Wno-unused-result -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -Wall -arch x86_64 -g -Dversion_info=(1,4,6,'final',0) -D__version__=1.4.6 -I/usr/local/Cellar/mysql/8.0.19/include/mysql -I/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m -c MySQLdb/_mysql.c -o build/temp.macosx-10.9-x86_64-3.6/MySQLdb/_mysql.o
+  gcc -bundle -undefined dynamic_lookup -arch x86_64 -g build/temp.macosx-10.9-x86_64-3.6/MySQLdb/_mysql.o -L/usr/local/Cellar/mysql/8.0.19/lib -lmysqlclient -lssl -lcrypto -o build/lib.macosx-10.9-x86_64-3.6/MySQLdb/_mysql.cpython-36m-darwin.so
+  ld: library not found for -lssl
+  clang: error: linker command failed with exit code 1 (use -v to see invocation)
+  error: command 'gcc' failed with exit status 1
+  ----------------------------------------
+  ERROR: Failed building wheel for mysqlclient
+```
 Some pip dependencies require the mysql_config. Thus, following fix can be applied:
 
 ```
