@@ -64,7 +64,7 @@ if __name__ == '__main__':
     print(text)
 ```
 
-output:
+Output:
 
 ```heut sein ein wirklich lang tag sein der hund essen sein leckerli```
 
