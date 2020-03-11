@@ -41,7 +41,5 @@ class Lemmatizer():
             if verbose:
                 print("{} -> {} ({})".format(word, token, pos))
             if pos.startswith(exclude_pos):
-                output.append(token.lower() if lower else token)
-            else:
                 output.append(word.lower() if lower else word)
         return ' '.join(output)
