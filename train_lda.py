@@ -43,11 +43,12 @@ def prepare_articles(articles, from_cache=False):
 
 if __name__ == '__main__':
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(from_cache=False)
-    texts = prepare_articles(articles=articles, from_cache=False)
+    articles = newsapi.list_articles(from_cache=True)
+    texts = prepare_articles(articles=articles, from_cache=True)
 
     # Train LDA
     lda = Lda()
     lda.train_lda(texts=texts, num_topics=20)
     lda.persist_lda()
+    lda.export_html()
     lda.visualize()

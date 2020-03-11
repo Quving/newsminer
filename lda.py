@@ -72,6 +72,16 @@ class Lda():
         new_doc_bow = self.dictionary.doc2bow(text)
         return self.ldamodel.get_document_topics(new_doc_bow)
 
+    def export_html(self):
+        self.logger.info("Export LDA to html file.")
+        lda_display = pyLDAvis.gensim.prepare(
+            self.ldamodel,
+            self.bow_corpus,
+            self.dictionary,
+            sort_topics=True
+        )
+        pyLDAvis.save_html(lda_display, self.storage_path + "/index.html")
+
     def visualize(self):
         """
         Visualizes the lda-model usung LDAVIS.
