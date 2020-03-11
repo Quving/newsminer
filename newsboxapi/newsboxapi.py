@@ -10,7 +10,7 @@ class NewsboxApi:
     AUTH_TOKEN = Config.auth_token
     API_ENDPOINT = Config.api_endpoint
 
-    def list_articles(self, from_cache):
+    def list_articles(self, from_cache=False):
         """
         Returns a list of all articles that is stored in the configured api endpoint. The returned list contains
          instances of the class 'Article'.
