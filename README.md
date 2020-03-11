@@ -54,3 +54,15 @@ output:
 ### References
 - https://datascience.blog.wzb.eu/2016/07/13/accurate-part-of-speech-tagging-of-german-texts-with-nltk/ 
 - https://towardsdatascience.com/topic-modeling-and-latent-dirichlet-allocation-in-python-9bf156893c24
+
+
+## Troubleshooting
+### Mysql - Problems (Mac)
+Some pip dependencies require the mysql_config. Thus, following fix can be applied:
+
+```
+brew install mysql-client
+brew install openssl
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+```
+
