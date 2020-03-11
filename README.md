@@ -42,3 +42,8 @@ if __name__ == '__main__':
 output:
 
 ```heut sein ein wirklich lang tag sein der hund essen sein leckerli```
+
+### Train LDA
+- In order to train a LDA, the POS-Tagger is required (stored locally in ```.../artififacts/tagger/...```)
+- Execute ```python train_lda.py```. It can take some minutes depending if you're using cached files or not.
+- If it's done, the browser should opens up automatically.
