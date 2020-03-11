@@ -35,9 +35,13 @@ class Lemmatizer():
         output = list()
         text = " ".join([x for x in text.split() if x.isalnum()]).strip()
         tagged_text = self.tagger.tag(text=text.split(' '))  # Output [(token, pos)]
+        exclude_pos = "N"
         for word, pos in tagged_text:
             token = self.lemmatize_word(word, pos)
             if verbose:
                 print("{} -> {} ({})".format(word, token, pos))
-            output.append(token.lower() if lower else token)
+            if pos.startswith(exclude_pos):
+                output.append(token.lower() if lower else token)
+            else:
+                output.append(word.lower() if lower else word)
         return ' '.join(output)

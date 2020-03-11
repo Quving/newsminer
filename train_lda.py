@@ -25,7 +25,7 @@ def prepare_articles(articles, from_cache=False):
                 for text in [article.description, article.content]:
                     text = re.sub('\[.*?\]', '', text)
                     text = " ".join([x for x in text.split() if x.isalnum() or '.' in x])
-                    article_text += lemmatizer.lemmatize_text(text=text)
+                    article_text += lemmatizer.lemmatize_text(text=text, verbose=False)
 
             article_text = [x for x in article_text.split() if x not in german_stop_words]
             texts.append(article_text)
@@ -40,7 +40,7 @@ def prepare_articles(articles, from_cache=False):
 if __name__ == '__main__':
     newsapi = NewsboxApi()
     articles = newsapi.list_articles(from_cache=True)
-    texts = prepare_articles(articles=articles, from_cache=True)
+    texts = prepare_articles(articles=articles, from_cache=False)
 
     # Train LDA
     lda = Lda()
