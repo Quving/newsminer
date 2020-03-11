@@ -1,3 +1,4 @@
+import os
 import pickle
 import re
 
@@ -13,8 +14,9 @@ def prepare_articles(articles, from_cache=False):
     texts = []
     lemmatizer = Lemmatizer()
     german_stop_words = stopwords.words('german')
+    filename = "data/lda-trainingdata.pickle"
     if from_cache:
-        with open('data/lda-trainingdata.pickle', 'rb') as file:
+        with open(filename, 'rb') as file:
             texts = pickle.load(file)
             return texts
     else:
@@ -31,7 +33,9 @@ def prepare_articles(articles, from_cache=False):
             texts.append(article_text)
 
         # Cache lda-trainingdata
-        with open('data/lda-trainingdata.pickle', 'wb') as file:
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        with open(filename, 'wb') as file:
             pickle.dump(texts, file)
 
     return texts
@@ -39,8 +43,8 @@ def prepare_articles(articles, from_cache=False):
 
 if __name__ == '__main__':
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(from_cache=True)
-    texts = prepare_articles(articles=articles, from_cache=True)
+    articles = newsapi.list_articles(from_cache=False)
+    texts = prepare_articles(articles=articles, from_cache=False)
 
     # Train LDA
     lda = Lda()

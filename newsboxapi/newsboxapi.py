@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import requests
@@ -38,6 +39,9 @@ class NewsboxApi:
                     for json in articles:
                         articles = Article(json=json)
                         list_of_articles.append(articles)
+
+            if not os.path.exists("cache"):
+                os.makedirs("cache")
             with open(filename, 'wb') as file:
                 pickle.dump(list_of_articles, file)
         return list_of_articles
