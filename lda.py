@@ -2,7 +2,7 @@ import os
 import pickle
 
 import pyLDAvis.gensim
-from gensim import corpora
+from gensim import corpora, models
 from gensim.models.ldamodel import LdaModel
 
 from config import Config, Logger
@@ -50,8 +50,11 @@ class Lda():
         self.logger.info("Create corpus, dictionary lda-model.")
         self.dictionary = corpora.Dictionary(texts)
         self.bow_corpus = [self.dictionary.doc2bow(text) for text in texts]
+        tfidf = models.TfidfModel(self.bow_corpus)
+        corpus_tfidf = tfidf[self.bow_corpus]
+
         self.ldamodel = LdaModel(
-            self.bow_corpus,
+            corpus=corpus_tfidf,
             num_topics=num_topics,
             id2word=self.dictionary,
             passes=10
