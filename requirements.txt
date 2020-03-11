@@ -37,6 +37,7 @@ pdfminer.six==20200124
 pluggy==0.13.1
 portend==2.6
 progressbar==2.5
+progressbar2==3.50.0
 py==1.8.1
 pycryptodome==3.9.7
 pyLDAvis==2.1.2
@@ -44,6 +45,7 @@ pyparsing==2.4.6
 pytest==5.3.5
 python-dateutil==2.8.1
 python-docx==0.8.10
+python-utils==2.4.0
 pytz==2019.3
 requests==2.23.0
 s3transfer==0.3.3
