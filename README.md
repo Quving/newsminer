@@ -24,8 +24,6 @@ in order to train a LDA-Model.
 - Finally execute ``` python train_tagger_de.py ``` It will store the tagger in pickle-format to 
 ```[repo]/artifacts/tagger/```
 
-#### References
-https://datascience.blog.wzb.eu/2016/07/13/accurate-part-of-speech-tagging-of-german-texts-with-nltk/ 
  
 ### Stemming/Lemmatization
 Example snippet.
@@ -52,3 +50,7 @@ output:
 ## Approach
 - If the tagger tag a word as noun, the original word will be taken instead of its stem.
 - Only nouns will be respected for the lda-model.
+
+### References
+- https://datascience.blog.wzb.eu/2016/07/13/accurate-part-of-speech-tagging-of-german-texts-with-nltk/ 
+- https://towardsdatascience.com/topic-modeling-and-latent-dirichlet-allocation-in-python-9bf156893c24
