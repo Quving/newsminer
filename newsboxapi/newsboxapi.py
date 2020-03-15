@@ -47,11 +47,11 @@ class NewsboxApi:
                         list_of_articles.append(articles)
                 elif response.status_code == 401:
                     self.logger.error("NEWSMINER_AUTH_TOKEN expired.")
-                    sys.exit("Script aborted due to error.")
+                    sys.exit(1)
                 else:
                     self.logger.error(
                         "Unknown error occured while fetching neww articles from {}".format(Config.api_endpoint))
-                    sys.exit("Unknown server error.")
+                    sys.exit(1)
             if not os.path.exists("cache"):
                 os.makedirs("cache")
             with open(filename, 'wb') as file:
