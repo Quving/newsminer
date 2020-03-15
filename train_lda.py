@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     # Train LDA
     lda = Lda()
-    lda.train_lda(texts=texts, num_topics=15)
+    lda.train_lda(texts=texts, num_topics=10)
     lda.persist_lda()
     lda.export_html()
     # lda.visualize()
