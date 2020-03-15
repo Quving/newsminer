@@ -3,6 +3,7 @@ import pickle
 
 import pyLDAvis.gensim
 from gensim import corpora, models
+from gensim.models import LdaMulticore
 from gensim.models.ldamodel import LdaModel
 
 from config import Config, Logger
@@ -53,10 +54,11 @@ class Lda():
         tfidf = models.TfidfModel(self.bow_corpus)
         corpus_tfidf = tfidf[self.bow_corpus]
 
-        self.ldamodel = LdaModel(
+        self.ldamodel = LdaMulticore(
             corpus=corpus_tfidf,
             num_topics=num_topics,
             id2word=self.dictionary,
+            workers=5,
             passes=10
         )
 
