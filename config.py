@@ -13,6 +13,11 @@ class Config:
     # Lda
     lda_storage_path = 'artifacts/lda'
 
+    # Minio S3
+    minio_host = os.getenv("NEWSMINER_MINIO_HOST", "")
+    minio_access_key = os.getenv("NEWSMINER_MINIO_ACCESS_KEY", "")
+    minio_secret_key = os.getenv("NEWSMINER_MINIO_SECRET_KEY", "")
+
 
 class Logger:
     logger = logging.getLogger(__name__)

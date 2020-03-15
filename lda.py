@@ -58,8 +58,8 @@ class Lda():
             corpus=corpus_tfidf,
             num_topics=num_topics,
             id2word=self.dictionary,
-            workers=5,
-            passes=10
+            passes=10,
+            workers=3,
         )
 
     def classify(self, text):
@@ -71,6 +71,16 @@ class Lda():
         self.logger.info("Classify the given text.")
         new_doc_bow = self.dictionary.doc2bow(text)
         return self.ldamodel.get_document_topics(new_doc_bow)
+
+    def export_html(self):
+        self.logger.info("Export LDA to html file.")
+        lda_display = pyLDAvis.gensim.prepare(
+            self.ldamodel,
+            self.bow_corpus,
+            self.dictionary,
+            sort_topics=True
+        )
+        pyLDAvis.save_html(lda_display, self.storage_path + "/index.html")
 
     def visualize(self):
         """

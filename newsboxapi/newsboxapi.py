@@ -1,4 +1,6 @@
+import os
 import pickle
+import sys
 
 import requests
 
@@ -19,13 +21,13 @@ class NewsboxApi:
         """
         filename = "cache/articles.pickle"
         if from_cache:
-            self.logger.info("Use cached newsarticles of newsbox.quving.com.")
+            self.logger.info("Use cached newsarticles of {}.".format(Config.api_endpoint))
 
             with open(filename, 'rb') as file:
                 articles = pickle.load(file)
                 return articles
         else:
-            self.logger.info("Fetch all newsarticles from newsbox.quving.com.")
+            self.logger.info("Fetch all newsarticles from {}.".format(Config.api_endpoint))
             headers = {
                 'Authorization': 'Bearer {}'.format(self.AUTH_TOKEN),
             }
@@ -43,6 +45,15 @@ class NewsboxApi:
                     for json in articles:
                         articles = Article(json=json)
                         list_of_articles.append(articles)
+                elif response.status_code == 401:
+                    self.logger.error("NEWSMINER_AUTH_TOKEN expired.")
+                    sys.exit("Script aborted due to error.")
+                else:
+                    self.logger.error(
+                        "Unknown error occured while fetching neww articles from {}".format(Config.api_endpoint))
+                    sys.exit("Unknown server error.")
+            if not os.path.exists("cache"):
+                os.makedirs("cache")
             with open(filename, 'wb') as file:
                 pickle.dump(list_of_articles, file)
         return list_of_articles

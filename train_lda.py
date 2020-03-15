@@ -1,3 +1,4 @@
+import os
 import pickle
 import re
 
@@ -6,6 +7,7 @@ from progressbar import progressbar
 
 from lda import Lda
 from lemmatizer import Lemmatizer
+from minioapi.minioapi import MinioApi
 from newsboxapi.newsboxapi import NewsboxApi
 
 
@@ -13,8 +15,9 @@ def prepare_articles(articles, from_cache=False):
     texts = []
     lemmatizer = Lemmatizer()
     german_stop_words = stopwords.words('german')
+    filename = "data/lda-trainingdata.pickle"
     if from_cache:
-        with open('data/lda-trainingdata.pickle', 'rb') as file:
+        with open(filename, 'rb') as file:
             texts = pickle.load(file)
             return texts
     else:
@@ -31,19 +34,35 @@ def prepare_articles(articles, from_cache=False):
             texts.append(article_text)
 
         # Cache lda-trainingdata
-        with open('data/lda-trainingdata.pickle', 'wb') as file:
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        with open(filename, 'wb') as file:
             pickle.dump(texts, file)
 
     return texts
 
 
 if __name__ == '__main__':
+    # Settings
+    use_cache = False
+    update_html = True
+
+    # Retrieve and prepare dataset
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(from_cache=True)
-    texts = prepare_articles(articles=articles, from_cache=True)
+    articles = newsapi.list_articles(from_cache=use_cache)
+    texts = prepare_articles(articles=articles, from_cache=use_cache)
 
     # Train LDA
     lda = Lda()
-    lda.train_lda(texts=texts, num_topics=20)
+    lda.train_lda(texts=texts, num_topics=15)
     lda.persist_lda()
-    lda.visualize()
+    lda.export_html()
+    # lda.visualize()
+
+    # Update lda html for newsmap
+    if update_html:
+        minioapi = MinioApi()
+        bucket_name = 'newsmap'
+        minioapi.create_bucket(bucket_name=bucket_name)
+        minioapi.upload_file(bucket_name=bucket_name, filename='index.html', file='artifacts/lda/index.html')
+        minioapi.make_public(bucket_name=bucket_name)
