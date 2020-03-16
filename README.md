@@ -5,6 +5,8 @@ As the name suggests, this repository contains scripts to analyze news articles.
 For the first, only German texts will be analyzed. These texts will be provided by the [Newsbox-Api](https://newsbox.quving.com), which will aggregate new news at regular intervals.
 Goal is to obtain a LDA-Model that is capable of clustering the news.
 
+## Result and Demo
+The visualization of the LDA can be found on https://newsmap.quving.com.
 
 ## Setup
 
