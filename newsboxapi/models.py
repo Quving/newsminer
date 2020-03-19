@@ -4,6 +4,7 @@ class Article:
         self.content = json['content']
         self.created = json['created']
         self.description = json['description']
+        self.language = json['language']
         self.publishedAt = json['publishedAt']
         self.source = json['source']
         self.title = json['title']

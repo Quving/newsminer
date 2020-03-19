@@ -14,7 +14,7 @@ class NewsboxApi:
 
     logger = Logger.logger
 
-    def list_articles(self, from_cache=False):
+    def list_articles(self, language, from_cache=False):
         """
         Returns a list of all articles that is stored in the configured api endpoint. The returned list contains
          instances of the class 'Article'.
@@ -31,12 +31,14 @@ class NewsboxApi:
             headers = {
                 'Authorization': 'Bearer {}'.format(self.AUTH_TOKEN),
             }
-
+            params = (
+                ('language', language),
+            )
             url = '{}/news/articles/'.format(self.API_ENDPOINT)  # Initial url for page 1
 
             list_of_articles = []
             while url:
-                response = requests.get(url=url, headers=headers)
+                response = requests.get(url=url, headers=headers, params=params)
                 if response.status_code == 200:
                     response = response.json()
                     url = response['next']  # Overrite url to retrieve next pages.

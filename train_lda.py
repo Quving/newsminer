@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     # Retrieve and prepare dataset
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(from_cache=use_cache)
+    articles = newsapi.list_articles(language='de', from_cache=use_cache)
     texts = prepare_articles(articles=articles, from_cache=use_cache)
 
     # Train LDA
