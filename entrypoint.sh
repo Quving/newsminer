@@ -9,4 +9,4 @@ mkdir -p artifacts/tagger
 curl -X GET "https://minio.quving.com/newsbox/tagger_de.pickle" --output "artifacts/tagger/tagger_de.pickle"
 
 echo "Train and update LDA-Model."
-python train_lda.py
+python train_lda_de.py
