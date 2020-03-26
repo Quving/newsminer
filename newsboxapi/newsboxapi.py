@@ -14,7 +14,7 @@ class NewsboxApi:
 
     logger = Logger.logger
 
-    def list_articles(self, language, from_cache=False):
+    def list_articles(self, language, publishedAfter, from_cache=False):
         """
         Returns a list of all articles that is stored in the configured api endpoint. The returned list contains
          instances of the class 'Article'.
@@ -33,6 +33,7 @@ class NewsboxApi:
             }
             params = (
                 ('language', language),
+                ('publishedAfter', publishedAfter),
             )
             url = '{}/news/articles/'.format(self.API_ENDPOINT)  # Initial url for page 1
 

@@ -1,3 +1,4 @@
+import datetime
 import os
 import pickle
 import re
@@ -9,6 +10,10 @@ from lda import Lda
 from lemmatizer import Lemmatizer
 from minioapi.minioapi import MinioApi
 from newsboxapi.newsboxapi import NewsboxApi
+
+NUM_TOPIC = 5
+PUBLISHED_BEFORE_N_DAYS = 7
+LANGUAGE = 'de'
 
 
 def prepare_articles(articles, from_cache=False):
@@ -49,12 +54,13 @@ if __name__ == '__main__':
 
     # Retrieve and prepare dataset
     newsapi = NewsboxApi()
-    articles = newsapi.list_articles(language='de', from_cache=use_cache)
+    publishedAfter = (datetime.date.today() - datetime.timedelta(days=PUBLISHED_BEFORE_N_DAYS)).isoformat()
+    articles = newsapi.list_articles(language=LANGUAGE, publishedAfter=publishedAfter, from_cache=use_cache)
     texts = prepare_articles(articles=articles, from_cache=use_cache)
 
     # Train LDA
     lda = Lda()
-    lda.train_lda(texts=texts, num_topics=10)
+    lda.train_lda(texts=texts, num_topics=NUM_TOPIC)
     lda.persist_lda()
     lda.export_html()
     # lda.visualize()
