@@ -32,7 +32,7 @@ class NewsboxApi:
                 articles = pickle.load(file)
                 return articles
         else:
-            self.logger.info("Fetch all newsarticles from {}.".format(Config.api_endpoint))
+            self.logger.info("Fetch all news-articles from {}.".format(Config.api_endpoint))
             headers = {
                 'Authorization': 'Bearer {}'.format(self.AUTH_TOKEN),
             }
