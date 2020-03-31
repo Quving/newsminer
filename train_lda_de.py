@@ -29,7 +29,7 @@ def prepare_articles(articles, from_cache=False):
         # Remove '... [+ xxx chars]' pattern from 'content'
         for article in progressbar(articles):
             article_text = ""
-            for text in [article.description, article.title, article.fulltext]:
+            for text in [article.description, article.title, article.fulltext if article.fulltext else article.content]:
                 if text:
                     text = re.sub('\[.*?\]', '', text)
                     text = " ".join([x for x in text.split() if x.isalnum() or '.' in x])
