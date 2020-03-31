@@ -29,8 +29,8 @@ def prepare_articles(articles, from_cache=False):
         # Remove '... [+ xxx chars]' pattern from 'content'
         for article in progressbar(articles):
             article_text = ""
-            if article.content:
-                for text in [article.description, article.content]:
+            for text in [article.description, article.title, article.fulltext]:
+                if text:
                     text = re.sub('\[.*?\]', '', text)
                     text = " ".join([x for x in text.split() if x.isalnum() or '.' in x])
                     article_text += lemmatizer.lemmatize_text(text=text, verbose=False)
