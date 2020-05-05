@@ -16,7 +16,7 @@ class NewsboxApi:
 
     def list_articles(self,
                       language='',
-                      publishedAfter='',
+                      published_after='',
                       publishedAt='',
                       publishedBefore='',
                       from_cache=False):
@@ -42,8 +42,8 @@ class NewsboxApi:
             if language:
                 params += (('language', language),)
 
-            if publishedAfter:
-                params += (('publishedAfter', publishedAfter),)
+            if published_after:
+                params += (('publishedAfter', published_after),)
 
             if publishedAt:
                 params += (('publishedAt', publishedAt),)

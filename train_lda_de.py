@@ -54,8 +54,10 @@ if __name__ == '__main__':
 
     # Retrieve and prepare dataset
     newsapi = NewsboxApi()
-    publishedAfter = (datetime.date.today() - datetime.timedelta(days=PUBLISHED_BEFORE_N_DAYS)).isoformat()
-    articles = newsapi.list_articles(language=LANGUAGE, publishedAfter=publishedAfter, from_cache=use_cache)
+    published_since_n_days = (datetime.date.today() - datetime.timedelta(days=PUBLISHED_BEFORE_N_DAYS)).isoformat()
+    articles = newsapi.list_articles(language=LANGUAGE,
+                                     published_after=published_since_n_days,
+                                     from_cache=use_cache)
     texts = prepare_articles(articles=articles, from_cache=use_cache)
 
     # Train LDA
@@ -70,5 +72,7 @@ if __name__ == '__main__':
         minioapi = MinioApi()
         bucket_name = 'newsmap'
         minioapi.create_bucket(bucket_name=bucket_name)
-        minioapi.upload_file(bucket_name=bucket_name, filename='index.html', file='artifacts/lda/index.html')
+        minioapi.upload_file(bucket_name=bucket_name,
+                             filename='index.html',
+                             file='artifacts/lda/index.html')
         minioapi.make_public(bucket_name=bucket_name)
