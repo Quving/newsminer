@@ -21,7 +21,7 @@ jaraco.classes==3.1.0
 jaraco.collections==3.0.0
 jaraco.functools==3.0.0
 jaraco.text==3.2.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 jmespath==0.9.5
 joblib==0.14.1
 lxml==4.5.0
