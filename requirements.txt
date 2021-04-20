@@ -40,7 +40,7 @@ pluggy==0.13.1
 portend==2.6
 progressbar==2.5
 progressbar2==3.50.0
-py==1.8.1
+py==1.10.0
 pycryptodome==3.9.7
 pyLDAvis==2.1.2
 pyparsing==2.4.6
