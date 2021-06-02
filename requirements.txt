@@ -57,7 +57,7 @@ smart-open==1.9.0
 sortedcontainers==2.1.0
 soupsieve==2.0
 tempora==2.1.0
-urllib3==1.25.8
+urllib3==1.26.5
 wcwidth==0.1.8
 zc.lockfile==2.0
 zipp==3.1.0
